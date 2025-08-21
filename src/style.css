@@ -1,0 +1,244 @@
+/* ========== Reset Global value of browser ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* Positioning / Layering of elements Last to Front */
+.layer1 {
+  z-index: 1;
+}
+
+.layer2 {
+  z-index: 2;
+}
+
+.layer3 {
+  z-index: 3;
+}
+
+.layer4 {
+  z-index: 4;
+}
+
+.layer5 {
+  z-index: 5;
+}
+
+.layer6 {
+  z-index: 6;
+}
+
+/* ========== Main Base Scene Container ========== */
+.scene {
+  display: flex;
+  flex: 1;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.skyDay {
+  height: 65vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: linear-gradient(to top, #ccdae3 10%, #5dade2 60%);
+}
+
+.skyNight {
+  height: 65vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, #12161a 10%, #204055 60%);
+}
+
+.oceanDay {
+  height: 35vh;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  background: linear-gradient(to top, #3498db 70%, #abb8c0 100%);
+}
+
+.oceanNight {
+  height: 35vh;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  background: linear-gradient(to top, #17252f 70%, #1a465e 100%);
+}
+
+.waves {
+  height: 8px;
+  width: 250px;
+  background-color: #22434f;
+  top: 105px;
+  left: 200px;
+  position: absolute;
+  border-radius: 70%;
+  animation: waveAnimation 15s linear infinite;
+}
+
+/* ========== Static Scene Layers ========== */
+
+.sun {
+  height: 100px;
+  width: 100px;
+  background-color: #ffb407;
+  border-radius: 50%;
+  position: absolute;
+  top: 10vh;
+  left: 70vw;
+  box-shadow: 0 0 30px #ceb98a;
+  z-index: 2;
+} 
+
+.moon {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: rgb(242, 238, 238);
+  position: absolute;
+  top: 10vh;
+  left: 70vw;
+  box-shadow: inset -8px -2px 5px rgba(0, 0, 0, 0.3),
+  inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+z-index: 2;
+}
+
+/* HTML: <div class="cloud"></div> */
+.cloudContainer {
+  display: flex;
+  align-self: flex-start;
+  height: 65vh;
+  width: 100%;
+}
+.cloud {
+  height: 30px; /* control the size */
+  position: absolute;
+  aspect-ratio: 1.8;
+  --g: radial-gradient(50% 50%, #000 98%, #0000) no-repeat;
+  mask: var(--g) 100% 100%/30% 60%,var(--g) 70% 0/50% 100%,var(--g) 0 100%/36% 68%,var(--g) 27% 18%/26% 40%,linear-gradient(#000 0 0) bottom/67% 58% no-repeat;
+  background: #e5eaed;
+  animation: cloudAnimation linear infinite;
+}
+
+
+/* ========== Weather Components (Sunny, Rain, Wind, Cloud) ========== */
+/* main weather base */
+.weather-components {
+  position: absolute;
+  height: 65vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+
+/* ========== Stars Component ========== */
+.stars-container {
+  position: absolute; 
+  width: 100%;
+  height: 65vh;
+  top: 0;
+  left: 0;
+}
+
+.stars {
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;   
+  opacity: 0.8;
+  animation: twinkle 2s infinite alternate ease-in-out;
+}
+
+/* ========== Main Weather UI (Glass Container) ========== */
+.glass-container {
+  display: flex;
+  flex: 1;
+  height: 450px;
+  width: 450px;
+  font-size: 30px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(255, 255, 255);
+  
+  /* Liquid glass effect */
+  background: rgba(255, 255, 255, 0.17);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+  position: absolute;
+}
+
+/* ========== Search Input & Button ========== */
+.searchBar {
+  width: 150px;
+  text-align: center;
+  padding: 5px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border-width: 0.1px;
+}
+
+.searchBtn {
+  color: #fff;
+  background-color: #007bff;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.searchBtn:hover {
+  background-color: #0056b3;
+  transition: background-color 0.3s;
+}
+
+
+/*========== Animations ==========*/
+@keyframes twinkle {
+  from { opacity: 0.4;}
+  to { opacity: 1;}
+}
+
+@keyframes cloudAnimation {
+  0% {
+      transform: translateX(-120%);
+  }
+  100% {
+      transform: translateX(120%);
+  }
+}
+
+@keyframes waveAnimation {
+
+  0% {
+      opacity: 0;
+      top: 10%;
+      width: 0%;
+  }
+  100% {
+      opacity: 100;
+      top: 200px;
+  }
+    
+}
