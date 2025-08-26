@@ -104,7 +104,7 @@
   transform: translateX(-50%); /* center the element on its left position */
   box-shadow: 0 0 30px #ceb98a;
   z-index: 2;
-} 
+}
 
 .moon {
   height: 100px;
@@ -114,7 +114,7 @@
   position: absolute;
   transform: translateX(-50%); /* center the element on its left position */
   box-shadow: inset -8px -2px 5px rgba(0, 0, 0, 0.3),
-  inset 2px 2px 5px rgba(0, 0, 0, 0.4);
+    inset 2px 2px 5px rgba(0, 0, 0, 0.4);
   z-index: 2;
 }
 
@@ -130,11 +130,12 @@
   position: absolute;
   aspect-ratio: 1.8;
   --g: radial-gradient(50% 50%, #000 98%, #0000) no-repeat;
-  mask: var(--g) 100% 100%/30% 60%,var(--g) 70% 0/50% 100%,var(--g) 0 100%/36% 68%,var(--g) 27% 18%/26% 40%,linear-gradient(#000 0 0) bottom/67% 58% no-repeat;
+  mask: var(--g) 100% 100%/30% 60%, var(--g) 70% 0/50% 100%,
+    var(--g) 0 100%/36% 68%, var(--g) 27% 18%/26% 40%,
+    linear-gradient(#000 0 0) bottom/67% 58% no-repeat;
   background: #e5eaed;
   animation: cloudAnimation linear infinite;
 }
-
 
 /* ========== Weather Components (Sunny, Rain, Wind, Cloud) ========== */
 /* main weather base */
@@ -146,10 +147,9 @@
   left: 0;
 }
 
-
 /* ========== Stars Component ========== */
 .stars-container {
-  position: absolute; 
+  position: absolute;
   width: 100%;
   height: 65vh;
   top: 0;
@@ -161,7 +161,7 @@
   height: 2px;
   background: white;
   border-radius: 50%;
-  position: absolute;   
+  position: absolute;
   opacity: 0.8;
   animation: twinkle 2s infinite alternate ease-in-out;
 }
@@ -178,7 +178,7 @@
   align-items: center;
   flex-direction: column;
   color: rgb(255, 255, 255);
-  
+
   /* Liquid glass effect */
   background: rgba(255, 255, 255, 0.17);
   border-radius: 16px;
@@ -211,32 +211,33 @@
   transition: background-color 0.3s;
 }
 
-
 /*========== Animations ==========*/
 @keyframes twinkle {
-  from { opacity: 0.4;}
-  to { opacity: 1;}
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes cloudAnimation {
   0% {
-      transform: translateX(-120%);
+    transform: translateX(-120%);
   }
   100% {
-      transform: translateX(120%);
+    transform: translateX(120%);
   }
 }
 
 @keyframes waveAnimation {
-
   0% {
-      opacity: 0;
-      top: 10%;
-      width: 0%;
+    opacity: 0;
+    top: 10%;
+    width: 0%;
   }
   100% {
-      opacity: 100;
-      top: 200px;
+    opacity: 100;
+    top: 200px;
   }
-    
 }
