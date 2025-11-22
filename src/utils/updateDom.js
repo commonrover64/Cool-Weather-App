@@ -1,63 +1,80 @@
 export default function updateDom(data) {
-  // get field to update them
   const cityField = document.querySelector(".cityField");
+  const countryField = document.querySelector(".countryField");
   const temperatureField = document.querySelector(".temperature");
   const weatherField = document.querySelector(".weatherCondition");
 
-  // update them with data
   cityField.innerHTML = data.location.name;
+  countryField.innerHTML = data.location.country;
   temperatureField.innerHTML = data.current.temp_c + " ° C";
   weatherField.innerHTML = data.current.condition.text;
 
-  // gets current timeData in date and time array
   const currDateAndTime = data.location.localtime.split(" ");
   const [hh, mm] = currDateAndTime[1].split(":").map(Number);
-  // Array [ "2025moo-08-10", "22:00" ]
 
-  // calculate if it's day / night and set css accordingly
   const hour = hh + mm / 60;
-  setValues(hour, data.current.is_day);
+  setWeatherTheme(hour, data);
 
-  // scatter clouds according to the weather conditon
   scatterClouds(data);
-
+  setWeatherEffects(data);
 }
 
-function setValues(hour, day) {
-  const sky = document.querySelector(".sky");
-  const ocean = document.querySelector(".ocean");
+function setWeatherTheme(hour, data) {
+  const condition = data.current.condition.text.toLowerCase();
+  const isDay = data.current.is_day;
+
+  const backgrounds = {
+    day: { sky: document.querySelector(".skyDay"), ocean: document.querySelector(".oceanDay") },
+    night: { sky: document.querySelector(".skyNight"), ocean: document.querySelector(".oceanNight") },
+    rainDay: { sky: document.querySelector(".skyRainDay"), ocean: document.querySelector(".oceanRainDay") },
+    rainNight: { sky: document.querySelector(".skyRainNight"), ocean: document.querySelector(".oceanRainNight") },
+    snowDay: { sky: document.querySelector(".skySnowDay"), ocean: document.querySelector(".oceanSnowDay") },
+    snowNight: { sky: document.querySelector(".skySnowNight"), ocean: document.querySelector(".oceanSnowNight") },
+    cloudyDay: { sky: document.querySelector(".skyCloudyDay"), ocean: document.querySelector(".oceanCloudyDay") },
+    cloudyNight: { sky: document.querySelector(".skyCloudyNight"), ocean: document.querySelector(".oceanCloudyNight") }
+  };
+
   const sun = document.querySelector(".sun");
   const moon = document.querySelector(".moon");
   const starsContainer = document.querySelector(".stars-container");
 
-  if (day == 1) {
-    // adding day theme before removing night theme
-    sky.classList.add("skyDay");
-    ocean.classList.add("oceanDay");
-    sun.hidden = false;
+  // Determine theme
+  let theme = isDay ? 'day' : 'night';
 
-    // remove night theme
-    moon.hidden = true;
-    starsContainer.hidden = true;
-    sky.classList.remove("skyNight");
-    ocean.classList.remove("oceanNight");
+  if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("storm") || condition.includes("thunder") || condition.includes("shower")) {
+    theme = isDay ? 'rainDay' : 'rainNight';
+  } else if (condition.includes("snow") || condition.includes("blizzard") || condition.includes("sleet") || condition.includes("ice")) {
+    theme = isDay ? 'snowDay' : 'snowNight';
+  } else if (condition.includes("overcast") || condition.includes("mist") || condition.includes("fog") || condition.includes("partly cloudy") || condition.includes("haze") || condition.includes("smoke")) {
+    theme = isDay ? 'cloudyDay' : 'cloudyNight';
+  }
 
-    // set sun according to time
+  // Apply theme (optimized to prevent flickering)
+
+  Object.keys(backgrounds).forEach(key => {
+    if (key === theme) {
+      if (!backgrounds[key].sky.classList.contains("visible")) {
+        backgrounds[key].sky.classList.add("visible");
+        backgrounds[key].ocean.classList.add("visible");
+      }
+    } else {
+      backgrounds[key].sky.classList.remove("visible");
+      backgrounds[key].ocean.classList.remove("visible");
+    }
+  });
+
+  // Handle celestial bodies
+  sun.classList.remove("visible");
+  moon.classList.remove("visible");
+  starsContainer.hidden = true;
+
+  if (theme === 'day' || theme.includes('Day')) {
+    sun.classList.add("visible");
     positionSunOrMoon(hour, sun);
-  } else {
-    // add night theme
-    moon.hidden = false;
+  } else if (theme === 'night' || theme.includes('Night')) {
+    moon.classList.add("visible");
     starsContainer.hidden = false;
     scatterStars(starsContainer);
-    sky.classList.add("skyNight");
-    ocean.classList.add("oceanNight");
-
-    // remove night theme
-    sun.hidden = true;
-    sky.classList.remove("skyDay");
-    ocean.classList.remove("oceanDay");
-
-    // set moon according to time
     positionSunOrMoon(hour, moon);
   }
 }
@@ -91,9 +108,6 @@ function positionSunOrMoon(hour, planet) {
 }
 
 function scatterStars(starContainer) {
-  // if stars are not created then only add new stars, else whenever
-  // we search for new place, it keeps on adding new stars
-
   if (starContainer.classList.contains("notCreated")) {
     for (let i = 0; i <= 505; i++) {
       const star = document.createElement("div");
@@ -111,10 +125,6 @@ function scatterStars(starContainer) {
 
 function scatterClouds(data) {
   const cloudContainer = document.querySelector(".cloudContainer");
-  // feature to add clouds according to weather conditon
-  // const condition = data.current.condition.text
-  // console.log(condition)Partly cloudy
-  // console.log(data)
 
   if (cloudContainer.classList.contains("noClouds")) {
     for (let i = 0; i < 13; i++) {
@@ -130,6 +140,59 @@ function scatterClouds(data) {
 
     cloudContainer.classList.remove("noClouds");
   }
+
+  // Update cloud style based on weather
+  const clouds = cloudContainer.querySelectorAll(".cloud");
+  clouds.forEach(cloud => {
+    if (condition.includes("rain") || condition.includes("storm") || condition.includes("thunder")) {
+      cloud.classList.add("dark");
+    } else {
+      cloud.classList.remove("dark");
+    }
+  });
 }
 
-scatterClouds();
+function setWeatherEffects(data) {
+  const weatherComponents = document.querySelector(".weather-components");
+  const condition = data.current.condition.text.toLowerCase();
+
+  // Clear existing rain/snow with fade out
+  const existingRain = weatherComponents.querySelectorAll(".rain");
+  const existingSnow = weatherComponents.querySelectorAll(".snow");
+
+  existingRain.forEach((el) => {
+    el.classList.add("fading-out");
+    setTimeout(() => el.remove(), 500);
+  });
+  existingSnow.forEach((el) => {
+    el.classList.add("fading-out");
+    setTimeout(() => el.remove(), 500);
+  });
+
+  if (condition.includes("rain") || condition.includes("drizzle") || condition.includes("shower")) {
+    for (let i = 0; i < 100; i++) {
+      const rain = document.createElement("div");
+      rain.classList.add("rain");
+      rain.style.left = Math.random() * 100 + "%";
+      rain.style.animationDuration = 0.5 + Math.random() * 0.5 + "s";
+      rain.style.animationDelay = Math.random() * 2 + "s";
+      rain.style.opacity = 0; // Start invisible
+      weatherComponents.appendChild(rain);
+      // Trigger reflow to enable transition
+      void rain.offsetWidth;
+      rain.style.opacity = 1; // Fade in (handled by CSS animation keyframes mostly, but good for base state)
+    }
+  } else if (condition.includes("snow") || condition.includes("blizzard") || condition.includes("sleet")) {
+    for (let i = 0; i < 50; i++) {
+      const snow = document.createElement("div");
+      snow.classList.add("snow");
+      snow.style.left = Math.random() * 100 + "%";
+      snow.style.animationDuration = 2 + Math.random() * 3 + "s";
+      snow.style.animationDelay = Math.random() * 2 + "s";
+      snow.style.opacity = 0;
+      weatherComponents.appendChild(snow);
+      void snow.offsetWidth;
+      snow.style.opacity = 1;
+    }
+  }
+}

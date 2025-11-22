@@ -1,56 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css" />
-    <title>cool Weather WebApp</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <div class="scene">
-      <!-- static scene layers  -->
-      <div class="sky skyDay"></div>
-      <div class="ocean oceanDay">
-        <!-- <div class="waves"></div> -->
-      </div>
 
-      <div class="sun layer3"></div>
-      <div class="moon layer3" hidden></div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/style.css" />
+  <script type="module" src="/src/main.js"></script>
+  <title>cool Weather WebApp</title>
+</head>
 
-      <div class="cloudContainer layer2 noClouds">
-        <!-- <div class="cloud layer2"></div> -->
-      </div>
-
-      <!-- weather components -->
-      <div class="weather-components layer4">
-        <div class="sunny"></div>
-        <div class="cloudy"></div>
-        <div class="windy"></div>
-        <div class="rain"></div>
-      </div>
-
-      <!-- stars -->
-      <!-- notCreated class = stars not created in website (just used as a flag lol) -->
-      <div class="stars-container layer2 notCreated" hidden></div>
-
-      <!-- main weather ui -->
-      <form class="glass-container layer6">
-        <span class="title"><b>Weather App</b></span>
-        <input
-          type="text"
-          class="searchBar"
-          placeholder="Search for a Location"
-        />
-        <button class="searchBtn">Search</button>
-
-        <!-- Weather infos -->
-        <h2 class="cityField"></h2>
-        <p class="temperature"><img src="" class="weatherEmoji" /></p>
-        <p class="weatherCondition"></p>
-      </form>
+<body>
+  <div id="app"></div>
+  <div class="scene">
+    <!-- static scene layers  -->
+    <div class="sky skyDay visible"></div>
+    <div class="sky skyNight"></div>
+    <div class="sky skyRainDay"></div>
+    <div class="sky skyRainNight"></div>
+    <div class="sky skySnowDay"></div>
+    <div class="sky skySnowNight"></div>
+    <div class="sky skyCloudyDay"></div>
+    <div class="sky skyCloudyNight"></div>
+    <div class="ocean oceanDay visible"></div>
+    <div class="ocean oceanNight"></div>
+    <div class="ocean oceanRainDay"></div>
+    <div class="ocean oceanRainNight"></div>
+    <div class="ocean oceanSnowDay"></div>
+    <div class="ocean oceanSnowNight"></div>
+    <div class="ocean oceanCloudyDay"></div>
+    <div class="ocean oceanCloudyNight">
+      <!-- <div class="waves"></div> -->
     </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+    <div class="sun layer3"></div>
+    <div class="moon layer3"></div>
+
+    <div class="cloudContainer layer2 noClouds">
+      <!-- <div class="cloud layer2"></div> -->
+    </div>
+
+    <!-- weather components -->
+    <div class="weather-components layer4">
+    </div>
+
+    <!-- stars -->
+    <!-- notCreated class = stars not created in website (just used as a flag lol) -->
+    <div class="stars-container layer2 notCreated" hidden></div>
+
+    <!-- main weather ui -->
+    <form class="glass-container layer6">
+      <span class="title"><b>Weather App</b></span>
+      <input type="text" class="searchBar" placeholder="Search for a Location" />
+      <button class="searchBtn">Search</button>
+
+      <!-- Weather infos -->
+      <h2 class="cityField"></h2>
+      <h3 class="countryField"></h3>
+      <p class="temperature"><img src="" class="weatherEmoji" /></p>
+      <p class="weatherCondition"></p>
+    </form>
+  </div>
+</body>
+
 </html>

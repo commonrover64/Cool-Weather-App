@@ -1,9 +1,13 @@
 /* ========== Reset Global value of browser ========== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
+
 /* Positioning / Layering of elements Last to Front */
 .layer1 {
   z-index: 1;
@@ -42,44 +46,98 @@
   z-index: 0;
 }
 
-.skyDay {
+.sky {
   height: 65vh;
   width: 100%;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.sky.visible {
+  opacity: 1;
+}
+
+.skyDay {
   background: linear-gradient(to top, #ccdae3 10%, #5dade2 60%);
 }
 
 .skyNight {
-  height: 65vh;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
   background: linear-gradient(to bottom, #12161a 10%, #204055 60%);
 }
 
-.oceanDay {
+.skyRainDay {
+  background: linear-gradient(to top, #4b6cb7 10%, #182848 60%);
+}
+
+.skyRainNight {
+  background: linear-gradient(to top, #203a43 10%, #2c5364 60%);
+}
+
+.skySnowDay {
+  background: linear-gradient(to top, #e6dada 10%, #274046 60%);
+}
+
+.skySnowNight {
+  background: linear-gradient(to top, #83a4d4 10%, #b6fbff 60%);
+}
+
+.skyCloudyDay {
+  background: linear-gradient(to top, #bdc3c7 10%, #2c3e50 60%);
+}
+
+.skyCloudyNight {
+  background: linear-gradient(to top, #2c3e50 10%, #000000 60%);
+}
+
+.ocean {
   height: 35vh;
   width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
   z-index: 3;
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.ocean.visible {
+  opacity: 1;
+}
+
+.oceanDay {
   background: linear-gradient(to top, #3498db 70%, #abb8c0 100%);
 }
 
 .oceanNight {
-  height: 35vh;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 3;
   background: linear-gradient(to top, #17252f 70%, #1a465e 100%);
+}
+
+.oceanRainDay {
+  background: linear-gradient(to top, #3a6073 70%, #3a6073 100%);
+}
+
+.oceanRainNight {
+  background: linear-gradient(to top, #243b55 70%, #141e30 100%);
+}
+
+.oceanSnowDay {
+  background: linear-gradient(to top, #93a5cf 70%, #e4efe9 100%);
+}
+
+.oceanSnowNight {
+  background: linear-gradient(to top, #29323c 70%, #485563 100%);
+}
+
+.oceanCloudyDay {
+  background: linear-gradient(to top, #757f9a 70%, #d7dde8 100%);
+}
+
+.oceanCloudyNight {
+  background: linear-gradient(to top, #232526 70%, #414345 100%);
 }
 
 .waves {
@@ -101,9 +159,16 @@
   background-color: #ffb407;
   border-radius: 50%;
   position: absolute;
-  transform: translateX(-50%); /* center the element on its left position */
+  transform: translateX(-50%);
+  /* center the element on its left position */
   box-shadow: 0 0 30px #ceb98a;
   z-index: 2;
+  transition: all 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.sun.visible {
+  opacity: 1;
 }
 
 .moon {
@@ -112,10 +177,17 @@
   border-radius: 50%;
   background-color: rgb(242, 238, 238);
   position: absolute;
-  transform: translateX(-50%); /* center the element on its left position */
+  transform: translateX(-50%);
+  /* center the element on its left position */
   box-shadow: inset -8px -2px 5px rgba(0, 0, 0, 0.3),
     inset 2px 2px 5px rgba(0, 0, 0, 0.4);
   z-index: 2;
+  transition: all 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.moon.visible {
+  opacity: 1;
 }
 
 /* HTML: <div class="cloud"></div> */
@@ -125,8 +197,10 @@
   height: 65vh;
   width: 100%;
 }
+
 .cloud {
-  height: 30px; /* control the size */
+  height: 30px;
+  /* control the size */
   position: absolute;
   aspect-ratio: 1.8;
   --g: radial-gradient(50% 50%, #000 98%, #0000) no-repeat;
@@ -135,6 +209,10 @@
     linear-gradient(#000 0 0) bottom/67% 58% no-repeat;
   background: #e5eaed;
   animation: cloudAnimation linear infinite;
+}
+
+.cloud.dark {
+  background: #556;
 }
 
 /* ========== Weather Components (Sunny, Rain, Wind, Cloud) ========== */
@@ -178,19 +256,22 @@
   align-items: center;
   flex-direction: column;
   color: rgb(255, 255, 255);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
   /* Liquid glass effect */
-  background: rgba(255, 255, 255, 0.17);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.5px);
-  -webkit-backdrop-filter: blur(5.5px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   position: absolute;
 }
 
 /* ========== Search Input & Button ========== */
 .searchBar {
-  width: 150px;
+  width: 60%;
+  max-width: 200px;
   text-align: center;
   padding: 5px;
   margin: 10px 0;
@@ -211,11 +292,21 @@
   transition: background-color 0.3s;
 }
 
+.countryField {
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
 /*========== Animations ==========*/
 @keyframes twinkle {
   from {
     opacity: 0.4;
   }
+
   to {
     opacity: 1;
   }
@@ -224,20 +315,109 @@
 @keyframes cloudAnimation {
   0% {
     transform: translateX(-120%);
+    opacity: 0;
   }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
   100% {
     transform: translateX(120%);
+    opacity: 0;
   }
 }
 
 @keyframes waveAnimation {
   0% {
     opacity: 0;
-    top: 10%;
-    width: 0%;
+    transform: translateY(20px) scaleX(0.8);
   }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0) scaleX(1);
+  }
+
   100% {
-    opacity: 100;
-    top: 200px;
+    opacity: 0;
+    transform: translateY(20px) scaleX(0.8);
+  }
+}
+
+/* Rain Animation */
+.rain {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.6);
+  top: -20px;
+  z-index: 2;
+  animation: rainAnimation 1s linear infinite;
+  transition: opacity 0.5s ease-out;
+}
+
+.rain.fading-out {
+  opacity: 0;
+}
+
+@keyframes rainAnimation {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(80vh);
+    opacity: 0;
+  }
+}
+
+/* Snow Animation */
+.snow {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: white;
+  border-radius: 50%;
+  top: -10px;
+  z-index: 2;
+  animation: snowAnimation 3s linear infinite;
+  transition: opacity 0.5s ease-out;
+}
+
+.snow.fading-out {
+  opacity: 0;
+}
+
+@keyframes snowAnimation {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(80vh) translateX(20px);
+    opacity: 0;
   }
 }
