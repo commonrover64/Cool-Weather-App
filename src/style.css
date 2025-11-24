@@ -1,20 +1,32 @@
 /* ========== Reset Global value of browser ========== */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 /* Positioning / Layering of elements Last to Front */
-.layer1 { z-index: 1; }
-.layer2 { z-index: 2; }
-.layer3 { z-index: 3; }
-.layer4 { z-index: 4; }
-.layer5 { z-index: 5; }
-.layer6 { z-index: 6; }
+.layer1 {
+  z-index: 1;
+}
+.layer2 {
+  z-index: 2;
+}
+.layer3 {
+  z-index: 3;
+}
+.layer4 {
+  z-index: 4;
+}
+.layer5 {
+  z-index: 5;
+}
+.layer6 {
+  z-index: 6;
+}
 
 /* ========== Main Base Scene Container ========== */
 .scene {
@@ -62,7 +74,7 @@
 }
 
 .skySnowDay {
-  background: linear-gradient(to top, #E6DADA 0%, #274046 100%);
+  background: linear-gradient(to top, #e6dada 0%, #274046 100%);
 }
 
 .skySnowNight {
@@ -97,7 +109,7 @@
 }
 
 .oceanNight {
-  background: linear-gradient(to top, #0f2027 0%, #203a43 100%);
+  background: linear-gradient(to top, #4d6874 0%, #203c66 100%);
 }
 
 .oceanRainDay {
@@ -117,7 +129,7 @@
 }
 
 .oceanCloudyDay {
-  background: linear-gradient(to top, #757f9a 0%, #d7dde8 100%);
+  background: linear-gradient(to top, #3a5eca 0%, #d7dde8 100%);
 }
 
 .oceanCloudyNight {
@@ -150,7 +162,8 @@
   background: radial-gradient(circle at 30% 30%, #fdfbfb, #ebedee);
   position: absolute;
   transform: translateX(-50%);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.4),
+    inset -10px -10px 20px rgba(0, 0, 0, 0.1);
   z-index: 2;
   transition: all 1.5s ease-in-out;
   opacity: 0;
@@ -178,8 +191,9 @@
   animation: cloudAnimation linear infinite;
 }
 
-.cloud::after, .cloud::before {
-  content: '';
+.cloud::after,
+.cloud::before {
+  content: "";
   position: absolute;
   background: inherit;
   border-radius: 50%;
@@ -246,7 +260,7 @@
   align-items: center;
   flex-direction: column;
   color: #fff;
-  
+
   /* Premium Glass Effect */
   background: rgba(255, 255, 255, 0.1);
   border-radius: 24px;
@@ -308,7 +322,7 @@
   font-size: 2.5rem;
   font-weight: 600;
   margin-top: 2rem;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .countryField {
@@ -342,15 +356,31 @@
 
 /*========== Animations ==========*/
 @keyframes twinkle {
-  0% { opacity: 0.3; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1.2); }
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 @keyframes cloudAnimation {
-  0% { transform: translateX(-150%); opacity: 0; }
-  10% { opacity: 0.8; }
-  90% { opacity: 0.8; }
-  100% { transform: translateX(150%); opacity: 0; }
+  0% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(150%);
+    opacity: 0;
+  }
 }
 
 /* Rain Animation */
@@ -358,17 +388,31 @@
   position: absolute;
   width: 2px;
   height: 20px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.6));
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.6)
+  );
   top: -20px;
   z-index: 2;
   animation: rainAnimation 0.8s linear infinite;
 }
 
 @keyframes rainAnimation {
-  0% { transform: translateY(0); opacity: 0; }
-  20% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(80vh); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(80vh);
+    opacity: 0;
+  }
 }
 
 /* Snow Animation */
@@ -380,13 +424,23 @@
   border-radius: 50%;
   top: -10px;
   z-index: 2;
-  box-shadow: 0 0 4px rgba(255,255,255,0.8);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
   animation: snowAnimation 4s linear infinite;
 }
 
 @keyframes snowAnimation {
-  0% { transform: translate(0, 0); opacity: 0; }
-  20% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { transform: translate(20px, 80vh); opacity: 0; }
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(20px, 80vh);
+    opacity: 0;
+  }
 }
