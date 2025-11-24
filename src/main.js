@@ -20,7 +20,7 @@ async function init(city) {
     //update dom elements
     updateDom(data);
   } catch (err) {
-    alert("City not found or API error. Please try again.");
+    alert("City not found. Please check & try again.");
     console.error(err);
   } finally {
     // Reset loading state
