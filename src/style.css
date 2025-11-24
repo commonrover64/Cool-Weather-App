@@ -66,7 +66,7 @@
 }
 
 .skyRainDay {
-  background: linear-gradient(to top, #4b6cb7 0%, #182848 100%);
+  background: linear-gradient(to top, #688adb 0%, #101c35 100%);
 }
 
 .skyRainNight {
@@ -82,7 +82,7 @@
 }
 
 .skyCloudyDay {
-  background: linear-gradient(to top, #bdc3c7 0%, #2c3e50 100%);
+  background: linear-gradient(to top, #b3c0c7 0%, #bed9f7 100%);
 }
 
 .skyCloudyNight {
@@ -105,7 +105,7 @@
 }
 
 .oceanDay {
-  background: linear-gradient(to top, #00c6ff 0%, #0072ff 100%);
+  background: linear-gradient(to top, #3da3be 0%, #286dc2 100%);
 }
 
 .oceanNight {
@@ -113,7 +113,7 @@
 }
 
 .oceanRainDay {
-  background: linear-gradient(to top, #3a6073 0%, #16222a 100%);
+  background: linear-gradient(to top, #356c99 0%, #639ad8 100%);
 }
 
 .oceanRainNight {
@@ -129,7 +129,7 @@
 }
 
 .oceanCloudyDay {
-  background: linear-gradient(to top, #3a5eca 0%, #d7dde8 100%);
+  background: linear-gradient(to top, #84a8e9 0%, #4b89da 100%);
 }
 
 .oceanCloudyNight {
@@ -319,7 +319,7 @@
 }
 
 .cityField {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 600;
   margin-top: 2rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -334,12 +334,8 @@
 }
 
 .temperature {
-  font-size: 4rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  margin: 1rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
 }
 
@@ -387,7 +383,7 @@
 .rain {
   position: absolute;
   width: 2px;
-  height: 20px;
+  height: 15px;
   background: linear-gradient(
     to bottom,
     rgba(255, 255, 255, 0),
@@ -410,7 +406,7 @@
     opacity: 1;
   }
   100% {
-    transform: translateY(80vh);
+    transform: translateY(100vh);
     opacity: 0;
   }
 }
@@ -440,7 +436,7 @@
     opacity: 1;
   }
   100% {
-    transform: translate(20px, 80vh);
+    transform: translate(20px, 100vh);
     opacity: 0;
   }
 }
