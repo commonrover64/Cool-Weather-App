@@ -125,6 +125,7 @@ function scatterStars(starContainer) {
 
 function scatterClouds(data) {
   const cloudContainer = document.querySelector(".cloudContainer");
+  const condition = data.current.condition.text.toLowerCase();
 
   if (cloudContainer.classList.contains("noClouds")) {
     for (let i = 0; i < 13; i++) {
@@ -183,7 +184,7 @@ function setWeatherEffects(data) {
       rain.style.opacity = 1; // Fade in (handled by CSS animation keyframes mostly, but good for base state)
     }
   } else if (condition.includes("snow") || condition.includes("blizzard") || condition.includes("sleet")) {
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 70; i++) {
       const snow = document.createElement("div");
       snow.classList.add("snow");
       snow.style.left = Math.random() * 100 + "%";

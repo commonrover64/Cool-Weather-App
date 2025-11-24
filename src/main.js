@@ -35,8 +35,8 @@ const submitBtn = document.querySelector(".searchBtn");
 
 submitBtn.addEventListener("click", function (event) {
   const searchField = document.querySelector(".searchBar");
-  const city = searchField.value;
+  const city = searchField.value.trim();
+  init(city);
 
   event.preventDefault();
-  init(city);
 });
