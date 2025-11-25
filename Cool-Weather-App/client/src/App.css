@@ -1,0 +1,442 @@
+/* ========== Reset Global value of browser ========== */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+}
+
+/* Positioning / Layering of elements Last to Front */
+.layer1 {
+  z-index: 1;
+}
+.layer2 {
+  z-index: 2;
+}
+.layer3 {
+  z-index: 3;
+}
+.layer4 {
+  z-index: 4;
+}
+.layer5 {
+  z-index: 5;
+}
+.layer6 {
+  z-index: 6;
+}
+
+/* ========== Main Base Scene Container ========== */
+.scene {
+  display: flex;
+  flex: 1;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.sky {
+  height: 65vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.sky.visible {
+  opacity: 1;
+}
+
+/* Richer Gradients */
+.skyDay {
+  background: linear-gradient(to top, #89cff0 0%, #3a7bd5 100%);
+}
+
+.skyNight {
+  background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+}
+
+.skyRainDay {
+  background: linear-gradient(to top, #688adb 0%, #101c35 100%);
+}
+
+.skyRainNight {
+  background: linear-gradient(to top, #232526, #414345);
+}
+
+.skySnowDay {
+  background: linear-gradient(to top, #e6dada 0%, #274046 100%);
+}
+
+.skySnowNight {
+  background: linear-gradient(to top, #1c1c1c 0%, #4b5d67 100%);
+}
+
+.skyCloudyDay {
+  background: linear-gradient(to top, #b3c0c7 0%, #bed9f7 100%);
+}
+
+.skyCloudyNight {
+  background: linear-gradient(to top, #2c3e50 0%, #000000 100%);
+}
+
+.ocean {
+  height: 35vh;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  transition: opacity 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.ocean.visible {
+  opacity: 1;
+}
+
+.oceanDay {
+  background: linear-gradient(to top, #3da3be 0%, #286dc2 100%);
+}
+
+.oceanNight {
+  background: linear-gradient(to top, #4d6874 0%, #203c66 100%);
+}
+
+.oceanRainDay {
+  background: linear-gradient(to top, #356c99 0%, #639ad8 100%);
+}
+
+.oceanRainNight {
+  background: linear-gradient(to top, #141e30 0%, #243b55 100%);
+}
+
+.oceanSnowDay {
+  background: linear-gradient(to top, #93a5cf 0%, #e4efe9 100%);
+}
+
+.oceanSnowNight {
+  background: linear-gradient(to top, #29323c 0%, #485563 100%);
+}
+
+.oceanCloudyDay {
+  background: linear-gradient(to top, #84a8e9 0%, #4b89da 100%);
+}
+
+.oceanCloudyNight {
+  background: linear-gradient(to top, #384044 0%, #5c738a 100%);
+}
+
+/* ========== Static Scene Layers ========== */
+
+.sun {
+  height: 120px;
+  width: 120px;
+  background: radial-gradient(circle at center, #ffd700, #ff8c00);
+  border-radius: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  box-shadow: 0 0 60px rgba(255, 215, 0, 0.6), 0 0 100px rgba(255, 140, 0, 0.4);
+  z-index: 2;
+  transition: all 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.sun.visible {
+  opacity: 1;
+}
+
+.moon {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fdfbfb, #ebedee);
+  position: absolute;
+  transform: translateX(-50%);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.4),
+    inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  transition: all 1.5s ease-in-out;
+  opacity: 0;
+}
+
+.moon.visible {
+  opacity: 1;
+}
+
+/* Clouds */
+.cloudContainer {
+  display: flex;
+  align-self: flex-start;
+  height: 65vh;
+  width: 100%;
+}
+
+.cloud {
+  height: 40px;
+  position: absolute;
+  aspect-ratio: 2.5;
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  animation: cloudAnimation linear infinite;
+}
+
+.cloud::after,
+.cloud::before {
+  content: "";
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud::after {
+  width: 40px;
+  height: 40px;
+  top: -20px;
+  left: 15px;
+}
+
+.cloud::before {
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  left: 45px;
+}
+
+.cloud.dark {
+  background: linear-gradient(to bottom, #556, #778);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== Weather Components ========== */
+.weather-components {
+  position: absolute;
+  height: 65vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+/* Stars */
+.stars-container {
+  position: absolute;
+  width: 100%;
+  height: 65vh;
+  top: 0;
+  left: 0;
+}
+
+.stars {
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.8;
+  box-shadow: 0 0 4px white;
+  animation: twinkle 3s infinite alternate ease-in-out;
+}
+
+/* ========== Main Weather UI (Glass Container) ========== */
+.glass-container {
+  display: flex;
+  flex: 1;
+  height: 480px;
+  width: 400px;
+  font-size: 18px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+
+  /* Premium Glass Effect */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: absolute;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+/* Search Input & Button */
+.searchBar {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px 0;
+  border-radius: 30px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: background 0.3s;
+}
+
+.searchBar::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.searchBar:focus {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.searchBtn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.searchBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.cityField {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.countryField {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+.temperature {
+  font-size: 2.5rem;
+  font-weight: 700;
+  gap: 10px;
+}
+
+.weatherEmoji {
+  width: 64px;
+  height: 64px;
+}
+
+.weatherCondition {
+  font-size: 1.2rem;
+  text-transform: capitalize;
+  opacity: 0.9;
+}
+
+/*========== Animations ==========*/
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes cloudAnimation {
+  0% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(150%);
+    opacity: 0;
+  }
+}
+
+/* Rain Animation */
+.rain {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.6)
+  );
+  top: -20px;
+  z-index: 2;
+  animation: rainAnimation 0.8s linear infinite;
+}
+
+@keyframes rainAnimation {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Snow Animation */
+.snow {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  top: -10px;
+  z-index: 2;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+  animation: snowAnimation 4s linear infinite;
+}
+
+@keyframes snowAnimation {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(20px, 100vh);
+    opacity: 0;
+  }
+}
