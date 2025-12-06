@@ -1,8 +1,5 @@
 Weather Web App Project
 
-(PS: The project is in progress 🛠️)
-
-
 A visually immersive weather application that dynamically adapts its environment to reflect real-time weather conditions in any searched location.
 
 Key Features
